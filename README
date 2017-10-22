@@ -1,0 +1,6 @@
+Setup:
+Note that there exists some confliction about the libraries needed.
+Thus, we enable the option --skip-lock to resolve conflict.
+$ pip3 install pipenv
+$ pipenv --two
+$ pipenv install --skip-lock
