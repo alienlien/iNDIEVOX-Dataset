@@ -1,6 +1,38 @@
+Local fork for the indievox dataset.
+
 Setup:
 Note that there exists some confliction about the libraries needed.
 Thus, we enable the option --skip-lock to resolve conflict.
 $ pip3 install pipenv
 $ pipenv --two
 $ pipenv install --skip-lock
+
+Conflict:
+$ pipenv install
+Could not find a version that matches numpy==1.10.4,==1.13.3,>=1.11.3
+$ pipenv graph
+FukuML==0.4.1
+  - cvxopt [required: ==1.1.8, installed: 1.1.8]
+  - numpy [required: ==1.10.4, installed: 1.13.3]
+  - pep8 [required: ==1.7.0, installed: 1.7.0]
+  - scikit-learn [required: ==0.17.1, installed: 0.19.0]
+  - scipy [required: ==0.17.0, installed: 0.19.1]
+    - numpy [required: >=1.8.2, installed: 1.13.3]
+gensim==3.0.1
+  - numpy [required: >=1.11.3, installed: 1.13.3]
+  - scipy [required: >=0.18.1, installed: 0.19.1]
+    - numpy [required: >=1.8.2, installed: 1.13.3]
+  - six [required: >=1.5.0, installed: 1.11.0]
+  - smart-open [required: >=1.2.1, installed: 1.5.3]
+    - boto [required: >=2.32, installed: 2.48.0]
+    - bz2file [required: Any, installed: 0.98]
+    - requests [required: Any, installed: 2.18.4]
+      - certifi [required: >=2017.4.17, installed: 2017.7.27.1]
+      - chardet [required: >=3.0.2,<3.1.0, installed: 3.0.4]
+      - idna [required: >=2.5,<2.7, installed: 2.6]
+      - urllib3 [required: <1.23,>=1.21.1, installed: 1.22]
+jieba==0.39
+Pattern==2.6
+sklearn==0.0
+  - scikit-learn [required: Any, installed: 0.19.0]
+uniout==0.3.7
