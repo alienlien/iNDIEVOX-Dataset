@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
 
@@ -13,10 +14,13 @@ if __name__ == '__main__':
     train_data_in, train_data_out = np.split(train_data, [-1], axis=1)
     test_data_in, test_data_out = np.split(test_data, [-1], axis=1)
 
-    classifier = SVC(C=1000.0, kernel='rbf')
+    params = {'C': [1.0, 10.0, 100.0, 1000.0], 'kernel': ['linear', 'rbf']}
+    classifier = GridSearchCV(SVC(), param_grid=params, cv=5)
 
     num_samples = train_data.shape[0]
-    classifier.fit(train_data_in, train_data_out.reshape(num_samples, ))
+    classifier.fit(train_data_in, train_data_out.reshape(
+        num_samples, ))
+    print(classifier.best_estimator_)
     scores = cross_val_score(
         classifier, train_data_in, train_data_out.reshape(
             num_samples, ), cv=5)
