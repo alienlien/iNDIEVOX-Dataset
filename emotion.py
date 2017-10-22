@@ -2,6 +2,7 @@
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import cross_val_score
 
 TRAIN_DATASET_FILE = './dataset/emotion_combine_song_train.dataset'
 TEST_DATASET_FILE = './dataset/emotion_combine_song_test.dataset'
@@ -13,8 +14,14 @@ if __name__ == '__main__':
     test_data_in, test_data_out = np.split(test_data, [-1], axis=1)
 
     classifier = DecisionTreeClassifier(criterion='entropy')
+
+    num_samples = train_data.shape[0]
     classifier.fit(train_data_in, train_data_out)
-    score = classifier.score(train_data_in, train_data_out)
-    print('>> Score:', classifier.score(test_data_in, test_data_out))
-    print('>> Accuracy:',
+    scores = cross_val_score(
+        classifier, train_data_in, train_data_out.reshape(
+            num_samples, ), cv=3)
+    print('>> [Train] Scores:', scores)
+    print('>> [Train] Accuracy: %0.3f (+/- %0.3f)' % (scores.mean(),
+                                                      scores.std() * 2))
+    print('>> [Test] Accuracy:',
           accuracy_score(test_data_out, classifier.predict(test_data_in)))
