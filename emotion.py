@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import numpy as np
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
 
@@ -13,13 +13,13 @@ if __name__ == '__main__':
     train_data_in, train_data_out = np.split(train_data, [-1], axis=1)
     test_data_in, test_data_out = np.split(test_data, [-1], axis=1)
 
-    classifier = DecisionTreeClassifier(criterion='entropy')
+    classifier = SVC(C=1000.0, kernel='rbf')
 
     num_samples = train_data.shape[0]
-    classifier.fit(train_data_in, train_data_out)
+    classifier.fit(train_data_in, train_data_out.reshape(num_samples, ))
     scores = cross_val_score(
         classifier, train_data_in, train_data_out.reshape(
-            num_samples, ), cv=3)
+            num_samples, ), cv=5)
     print('>> [Train] Scores:', scores)
     print('>> [Train] Accuracy: %0.3f (+/- %0.3f)' % (scores.mean(),
                                                       scores.std() * 2))
