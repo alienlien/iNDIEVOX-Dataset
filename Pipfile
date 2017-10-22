@@ -7,8 +7,9 @@ name = "pypi"
 
 [packages]
 
-sklearn = "*"
 numpy = "*"
+scipy = "*"
+sklearn = "*"
 scikit-learn = "*"
 fukuml = "*"
 jieba = "*"
