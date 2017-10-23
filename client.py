@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 import json
+from docopt import docopt
 import requests
 
 PROFILE_URL = 'https://www.indievox.com/api/mir/song/profile/'
 FEATURE_URL = 'https://www.indievox.com/api/mir/song/feature/'
 APP_ID = 'P300000045'
 APP_SECRET = '9bdecdb004682865260c9d2a5cc71f0d'
-SONG_ID = '33156'
 
 
 class IndievoxClient(object):
@@ -37,14 +37,24 @@ def get(song_id, app_id, app_secret, url):
     return result.json()
 
 
+usage = """
+Usage:
+    ./client.py [options]
+
+Options:
+    --song=ID   The ID of the song to query. [default: 1]
+"""
 if __name__ == '__main__':
+    args = docopt(usage, help=True)
+    song_id = args['--song']
+
     client = IndievoxClient(
         app_id=APP_ID,
         app_secret=APP_SECRET,
         profile_url=PROFILE_URL,
         feature_url=FEATURE_URL)
 
-    prof = client.get_profile(SONG_ID)
+    prof = client.get_profile(song_id)
     print(json.dumps(prof, indent=2, ensure_ascii=False))
-    feature = client.get_feature(SONG_ID)
+    feature = client.get_feature(song_id)
     print(json.dumps(feature, indent=2, ensure_ascii=False))
