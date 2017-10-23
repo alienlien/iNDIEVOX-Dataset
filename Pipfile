@@ -9,20 +9,11 @@ name = "pypi"
 
 numpy = "*"
 scipy = "*"
-sklearn = "*"
 scikit-learn = "*"
-fukuml = "*"
-jieba = "*"
 gensim = "*"
-pattern = "*"
-uniout = "*"
-
+jieba = "*"
+leveldb = "*"
+docopt = "*"
 
 
 [dev-packages]
-
-
-
-[requires]
-
-python_version = "2.7"
